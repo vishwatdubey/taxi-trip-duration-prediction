@@ -20,3 +20,10 @@
   `test_cleaning.py`, `test_split.py`, `test_api.py`, `test_pipeline.py`) —
   16/16 passed, 0 failures, 0 skipped. `ruff check .` clean. Acceptance check
   passed.
+- 2026-08-17 — Phase 5 (Docker): DONE. `docker build -t taxi-duration:latest .`
+  succeeds (~47s, layer-cached deps). Model is trained inside the build (see
+  DECISIONS.md for why: host/image Python version mismatch broke cloudpickle
+  loading, and MLflow's file store bakes absolute host paths into meta.yaml).
+  Container run + curl verified: `/health` -> model_loaded true, `/predict` ->
+  15.83 min (matches host). `docker compose config` validates. Acceptance check
+  passed.

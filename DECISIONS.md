@@ -10,3 +10,19 @@
   `train.csv` is left untouched in `data/raw/` and is not used anywhere in this
   pipeline.
 - Phase 0 data source: `existing-file` -> `data/raw/yellow_tripdata_2023-01.parquet` (200,000 rows sampled to `data/processed/sample.parquet`).
+- Docker image trains the model at build time instead of copying `mlruns/` from
+  the host. Two reasons: (1) MLflow's file store bakes the host's absolute path
+  into every `meta.yaml` (`artifact_location`, `source`, `storage_location`), so
+  a copied `mlruns/` only resolves `models:/` and `runs:/` URIs if the container's
+  WORKDIR happens to match the host path byte-for-byte; (2) more fundamentally,
+  the local dev venv runs Python 3.10 (no 3.11 interpreter was available on the
+  host) while the spec pins the runtime image to `python:3.11-slim` — a pipeline
+  cloudpickled under 3.10 fails to unpickle under 3.11 (`TypeError: code()
+  argument 13 must be str, not int`, a CPython code-object format change).
+  Training inside the image with the image's own interpreter sidesteps both
+  problems and keeps the image genuinely self-contained: `COPY
+  data/processed/sample.parquet` + `RUN python -m src.train` happen during the
+  build, so `mlruns/` and `models/champion.json` are produced fresh by
+  Python 3.11 before the app code ever runs. Verified: container's
+  `/health` returns `model_loaded: true` and `/predict` returns the same
+  15.83-minute prediction as the host.
