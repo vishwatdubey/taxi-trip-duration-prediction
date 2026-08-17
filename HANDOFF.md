@@ -42,10 +42,8 @@ Full detail with timestamps is in `PROGRESS.md`; this is the summary.
 
 - **Phase 6 — GitHub Actions.** `.github/workflows/ci.yml`: checkout,
   setup-python 3.11, `ruff check .`, `pytest -v`, `docker build` (no push, no
-  secrets). YAML is valid and every step was individually run and passed
-  locally. The workflow itself could not be executed in this sandbox (no
-  GitHub Actions runner, no `act`). **Partially verified — see
-  `UNVERIFIED.md`.**
+  secrets). Pushed to `origin/main` and watched the real run via
+  `gh run watch` — green in 3m29s. **Verified.**
 
 - **Phase 7 — Documentation.** `README.md` with problem statement, mermaid
   architecture diagram, results table, 4-command quickstart, feature
@@ -67,15 +65,8 @@ validation split (RMSE 4.19 min, MAE 2.79 min).
 
 ## Everything in UNVERIFIED.md
 
-- **GitHub Actions CI** could not be run in this environment. To verify:
-  ```
-  git push origin main
-  gh run watch
-  ```
-  and confirm the `CI` workflow goes green. Every individual step it runs
-  (lint, prepare_data, train, test, docker build) was already verified to
-  pass locally, so this is a low-risk gap — mainly confirming the YAML
-  triggers and runs cleanly on GitHub's runner image.
+Nothing — after pushing to GitHub, the CI workflow was watched to completion
+and passed. See `UNVERIFIED.md` for the run link.
 
 ## Where this deviated from the spec, and why
 

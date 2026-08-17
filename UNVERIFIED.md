@@ -1,18 +1,11 @@
 # Unverified
 
-- **GitHub Actions CI (`.github/workflows/ci.yml`)**: cannot be executed in this
-  environment (no `act` tool, and running the real workflow requires pushing to
-  GitHub). Every individual step in the workflow was run and verified locally,
-  which is the best available substitute:
-  - `ruff check .` — passes (verified in Phase 4)
-  - `python scripts/prepare_data.py` — passes (Phase 0 acceptance check)
-  - `python -m src.train` — passes (Phase 1/2 acceptance check)
-  - `pytest -v` — 16/16 pass (Phase 4 acceptance check)
-  - `docker build -t taxi-duration:latest .` — succeeds (Phase 5 acceptance check)
+Nothing. Everything, including the GitHub Actions CI workflow, has been
+verified for real.
 
-  To verify for real: push this branch to GitHub (or open a PR against `main`)
-  with Actions enabled, and confirm the `CI` workflow run is green.
-  ```
-  git push origin main
-  gh run watch   # after the push triggers the workflow
-  ```
+- **GitHub Actions CI** was originally unverifiable in the sandbox (no `act`,
+  no way to run the real workflow without a GitHub push). After pushing to
+  `origin/main`, the `CI` workflow run was watched to completion via
+  `gh run watch` and finished green in 3m29s: checkout, setup-python 3.11,
+  lint, prepare_data, train, test, and docker build all passed.
+  Run: https://github.com/vishwatdubey/taxi-trip-duration-prediction/actions/runs/31982853813

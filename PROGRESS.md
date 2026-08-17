@@ -27,11 +27,10 @@
   Container run + curl verified: `/health` -> model_loaded true, `/predict` ->
   15.83 min (matches host). `docker compose config` validates. Acceptance check
   passed.
-- 2026-08-17 — Phase 6 (GitHub Actions): DONE, partially verified. Workflow YAML
-  is valid; every constituent step (lint, prepare_data, train, test, docker
-  build) was individually verified locally and passes. Actual execution on
-  GitHub Actions is not possible in this environment — logged in
-  UNVERIFIED.md with the exact command to verify after a push.
+- 2026-08-17 — Phase 6 (GitHub Actions): DONE, fully verified. Pushed to
+  origin/main and watched the triggered `CI` run to completion via
+  `gh run watch` — all steps (checkout, setup-python 3.11, lint,
+  prepare_data, train, test, docker build) passed green in 3m29s.
 - 2026-08-17 — Phase 7 (Documentation): DONE. README.md has all required
   sections (problem statement, mermaid architecture diagram, results table,
   quickstart, feature engineering, design decisions, not-implemented).
