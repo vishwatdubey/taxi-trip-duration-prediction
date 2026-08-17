@@ -15,6 +15,10 @@ You are building this **unattended**. The user is not available to answer questi
    Write the reason in `UNVERIFIED.md` with the exact command the user must run, then
    continue to the next phase.
 5. **Keep a running log** in `PROGRESS.md`: one line per phase with status and timestamp.
+6. **Use a virtual environment.** Create `.venv` in the project root (`python3 -m venv .venv`),
+   activate it, and install all dependencies there. Every `make` target and every script
+   must run inside this venv. Never `pip install` into the system Python. Add a
+   `requirements.txt` at the project root listing all dependencies with pinned versions.
 
 Target total runtime: the full pipeline (`make all`) must complete in under 3 minutes on
 sample data. Optimize for that — this is a teaching artifact, not a leaderboard entry.
@@ -238,7 +242,7 @@ gets screen-shared during teaching.
 ## Makefile
 
 ```
-make setup     # install deps
+make setup     # create .venv, activate it, install deps
 make data      # Phase 0
 make train     # Phases 1-2
 make test      # Phase 4
