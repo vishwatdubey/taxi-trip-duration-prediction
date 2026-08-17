@@ -16,3 +16,7 @@
   `pytest tests/test_api.py` passes 4/4 (health, valid predict in 0-120 range,
   malformed -> 422, batch predict) using TestClient, no real port needed.
   Acceptance check passed.
+- 2026-08-17 — Phase 4 (Tests): DONE. Full suite (`test_features.py`,
+  `test_cleaning.py`, `test_split.py`, `test_api.py`, `test_pipeline.py`) —
+  16/16 passed, 0 failures, 0 skipped. `ruff check .` clean. Acceptance check
+  passed.

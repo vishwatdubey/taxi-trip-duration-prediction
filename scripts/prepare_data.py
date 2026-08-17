@@ -86,7 +86,6 @@ def main() -> None:
     source_path, source_kind = select_source()
 
     df = pd.read_parquet(source_path)
-    n = min(SAMPLE_SIZE, len(df))
     if len(df) > SAMPLE_SIZE:
         df = df.sample(n=SAMPLE_SIZE, random_state=42).reset_index(drop=True)
 
