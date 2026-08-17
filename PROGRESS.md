@@ -11,3 +11,8 @@
   `nyc-taxi-duration`. Champion registered with alias `champion`.
   `python scripts/load_champion.py` loads via alias URI (no fallback needed)
   and predicts 15.83 min for the hardcoded sample input. Acceptance check passed.
+- 2026-08-17 — Phase 3 (FastAPI service): DONE. `app/main.py` loads the model
+  once via lifespan handler, exposes /health, /predict, /predict/batch.
+  `pytest tests/test_api.py` passes 4/4 (health, valid predict in 0-120 range,
+  malformed -> 422, batch predict) using TestClient, no real port needed.
+  Acceptance check passed.
