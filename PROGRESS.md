@@ -32,3 +32,8 @@
   build) was individually verified locally and passes. Actual execution on
   GitHub Actions is not possible in this environment — logged in
   UNVERIFIED.md with the exact command to verify after a push.
+- 2026-08-17 — Phase 7 (Documentation): DONE. README.md has all required
+  sections (problem statement, mermaid architecture diagram, results table,
+  quickstart, feature engineering, design decisions, not-implemented).
+  `notebooks/walkthrough.ipynb` executed end to end with `jupyter nbconvert
+  --execute` — 12/12 cells ran with zero errors, plots embedded.

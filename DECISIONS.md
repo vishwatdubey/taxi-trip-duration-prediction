@@ -26,3 +26,10 @@
   Python 3.11 before the app code ever runs. Verified: container's
   `/health` returns `model_loaded: true` and `/predict` returns the same
   15.83-minute prediction as the host.
+- `jupyter`, `nbformat`, `nbconvert`, and `ipykernel` were installed into
+  `.venv` to author and execute `notebooks/walkthrough.ipynb`, but were not
+  added to `requirements.txt`. They are needed only to edit/re-run the
+  notebook, not by the API, training, or tests, and keeping them out of
+  `requirements.txt` keeps the Docker image lean (the notebook isn't copied
+  into the image either). To re-run the notebook yourself:
+  `pip install jupyter nbconvert ipykernel && jupyter notebook`.
