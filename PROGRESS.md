@@ -27,3 +27,8 @@
   Container run + curl verified: `/health` -> model_loaded true, `/predict` ->
   15.83 min (matches host). `docker compose config` validates. Acceptance check
   passed.
+- 2026-08-17 — Phase 6 (GitHub Actions): DONE, partially verified. Workflow YAML
+  is valid; every constituent step (lint, prepare_data, train, test, docker
+  build) was individually verified locally and passes. Actual execution on
+  GitHub Actions is not possible in this environment — logged in
+  UNVERIFIED.md with the exact command to verify after a push.
